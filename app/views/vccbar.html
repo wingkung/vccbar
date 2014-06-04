@@ -1,0 +1,35 @@
+<div class="vccbar">
+    <a href="" ng-mouseenter="openDialog('login', 200)" ng-show="!agent.logined">未登录</a>
+    <a href="" ng-mouseenter="openDialog('state', 200)" ng-show="agent.logined">空闲</a>
+    <a href="" ng-mouseenter="openDialog('dial', 250)" ng-show="bar.collapse">外拨</a>
+    <a href="" ng-mouseenter="openDialog('hold', 300)" ng-show="bar.collapse">保持</a>
+    <a href="" ng-mouseenter="openDialog('transfer', 360)" ng-show="bar.collapse">转移</a>
+    <a href="" ng-mouseenter="openDialog('consult', 420)" ng-show="bar.collapse">咨询</a>
+    <a href="" ng-mouseenter="openDialog('more', 480)" ng-show="bar.collapse">更多</a>
+    <a href="" ng-click="collapseBar()" ng-show="agent.logined">{{bar.sign}}</a>
+</div>
+<div ng-switch="dialog.content" ng-style="{'left': dialog.left + 'px'}" class="vccpopover" ng-show="dialog.open" ng-mouseleave="hideDialog()">
+    <div ng-switch-when="login">
+        <div ng-include="'views/login.html'" ng-controller="LoginCtrl"></div>
+    </div>
+    <div ng-switch-when="dial">
+        <div ng-include="'views/dial.html'" ng-controller="DialCtrl"></div>
+    </div>
+    <div ng-switch-when="hold">
+        <div ng-include="'views/hold.html'" ng-controller="HoldCtrl"></div>
+    </div>
+    <div ng-switch-when="consult">
+        <div ng-include="'views/consult.html'" ng-controller="ConsultCtrl"></div>
+    </div>
+    <div ng-switch-when="logined">
+        <div ng-include="'views/logined.html'" ng-controller="LoginedCtrl"></div>
+    </div>
+    <div ng-switch-when="more">
+        <div ng-include="'views/more.html'" ng-controller="MoreCtrl"></div>
+    </div>
+    <div ng-switch-when="transfer">
+        <div ng-include="'views/transfer.html'" ng-controller="TransferCtrl"></div>
+    </div>
+</div>
+
+

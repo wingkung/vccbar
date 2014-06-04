@@ -1,0 +1,52 @@
+body{
+    min-height: 1024px;
+}
+
+.vccbar {
+    position: fixed;
+    bottom: 0px;
+    font-size: 16px;
+    height: 35px;
+    background-color: #6495ED;
+    z-index: 9;
+    min-width: 100px;
+    left: 200px;
+}
+
+.vccbar > a{
+    display: inline-block;
+    color: #ccc;
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 30px;
+}
+.vccbar > a.active{
+    color: #f2f1ee;
+    font-weight: bold;
+}
+.vccbar > a[href^="javascript:"]:after,
+.vccbar > a[href^="#"]:after {
+    content: "";
+}
+
+.vccpopover {
+    position: fixed;
+    bottom: 36px;
+    height: 200px;
+    z-index: 1010;
+    max-width: 276px;
+    min-width: 200px;
+    padding: 1px;
+    text-align: left;
+    white-space: normal;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    bottom: 36px;
+}
+

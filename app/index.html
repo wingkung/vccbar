@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+    <script src="bower_components/respond/dest/respond.src.js"></script>
+    <script src="scripts/ieelement.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<!--[if lt IE 8]>
+<p class="browsehappy">您正在使用 <strong>过时的</strong> 浏览器. 请 <a href="http://browsehappy.com/">升级您的浏览器</a> 以获得更好的体验.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div ng-app="vccbarApp">
+    <div ng-controller="VccbarCtrl" ng-include="'views/vccbar.html'"></div>
+</div>
+
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/vccbar.js"></script>
+<script src="scripts/controllers/consult.js"></script>
+<script src="scripts/controllers/dial.js"></script>
+<script src="scripts/controllers/hold.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/more.js"></script>
+<script src="scripts/controllers/transfer.js"></script>
+<script src="scripts/controllers/logined.js"></script>
+
+<!-- endbuild -->
+</body>
+</html>

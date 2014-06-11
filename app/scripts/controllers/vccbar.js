@@ -28,10 +28,10 @@ app.controller('VccbarCtrl', function($scope, $log){
         $scope.bar.collapse = collapse;
     };
 
-    $scope.openDialog = function(content, left){
+    $scope.openDialog = function(content, $event){
         $scope.dialog.open = true;
         $scope.dialog.content = content;
-        $scope.dialog.left = left;
+        $scope.dialog.left = $event.clientX - $event.offsetX;
     };
 
     $scope.hideDialog = function(){

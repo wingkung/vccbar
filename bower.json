@@ -2,8 +2,8 @@
   "name": "vccbar",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "*"
+    "angular": "*",
+    "socket.io-client": "~1.0.4"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

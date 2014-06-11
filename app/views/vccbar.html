@@ -1,5 +1,5 @@
 <div class="vccbar">
-    <a href="" ng-mouseenter="openDialog('login', $event)" ng-show="!agent.logined">未登录</a>
+    <a href="" ng-mouseenter="openDialog('login', $event)" ng-show="!agent.logined">{{loginTitle}}</a>
     <a href="" ng-mouseenter="openDialog('state', $event)" ng-show="agent.logined">空闲</a>
     <a href="" ng-mouseenter="openDialog('dial', $event)" ng-show="bar.collapse">外拨</a>
     <a href="" ng-mouseenter="openDialog('hold', $event)" ng-show="bar.collapse">保持</a>

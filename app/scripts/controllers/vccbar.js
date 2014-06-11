@@ -1,5 +1,5 @@
 var app = angular.module('vccbarApp');
-app.controller('VccbarCtrl', function($scope, $log){
+app.controller('VccbarCtrl', function($scope, $log, socket){
     $scope.agent = {
         logined: false,
         tenantId: "",
@@ -36,5 +36,10 @@ app.controller('VccbarCtrl', function($scope, $log){
 
     $scope.hideDialog = function(){
         $scope.dialog.open = false;
-    }
+    };
+
+    $scope.loginTitle = "未连接";
+    socket.on('connect', function(){
+        $scope.loginTitle = "已连接";
+    })
 });

@@ -4,8 +4,9 @@
 var app = angular.module('vccbarApp');
 
 app.factory('socket', function($rootScope, CTI) {
-    var socket = io.connect(CTI.url);
+    var socket = io(CTI.url);
     return {
+        connected: socket.connected,
         on: function(eventName, callback) {
             socket.on(eventName, function() {
                 var args = arguments;

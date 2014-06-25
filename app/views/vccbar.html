@@ -8,28 +8,126 @@
     <a href="" ng-mouseenter="openDialog('more', $event)" ng-show="bar.collapse">更多</a>
     <a href="" ng-click="collapseBar()" ng-show="agent.logined">{{bar.sign}}</a>
 </div>
-<div ng-switch="dialog.content" ng-style="{'left': dialog.left + 'px'}" class="vccpopover" ng-show="dialog.open" ng-mouseleave="hideDialog()">
+<div ng-switch="dialog.content" ng-style="{'left': dialog.left + 'px'}" class="vccpopover" ng-show="dialog.open"
+     ng-mouseleave="hideDialog()">
     <div ng-switch-when="login">
-        <div ng-include="'views/login.html'" ng-controller="LoginCtrl"></div>
+        <div ng-include="'vcc_login.html'" ng-controller="LoginCtrl"></div>
     </div>
     <div ng-switch-when="dial">
-        <div ng-include="'views/dial.html'" ng-controller="DialCtrl"></div>
+        <div ng-include="'vcc_dial.html'" ng-controller="DialCtrl"></div>
     </div>
     <div ng-switch-when="hold">
-        <div ng-include="'views/hold.html'" ng-controller="HoldCtrl"></div>
+        <div ng-include="'vcc_hold.html'" ng-controller="HoldCtrl"></div>
     </div>
     <div ng-switch-when="consult">
-        <div ng-include="'views/consult.html'" ng-controller="ConsultCtrl"></div>
+        <div ng-include="'vcc_consult.html'" ng-controller="ConsultCtrl"></div>
     </div>
     <div ng-switch-when="logined">
-        <div ng-include="'views/logined.html'" ng-controller="LoginedCtrl"></div>
+        <div ng-include="'vcc_logined.html'" ng-controller="LoginedCtrl"></div>
     </div>
     <div ng-switch-when="more">
-        <div ng-include="'views/more.html'" ng-controller="MoreCtrl"></div>
+        <div ng-include="'vcc_more.html'" ng-controller="MoreCtrl"></div>
     </div>
     <div ng-switch-when="transfer">
-        <div ng-include="'views/transfer.html'" ng-controller="TransferCtrl"></div>
+        <div ng-include="'vcc_transfer.html'" ng-controller="TransferCtrl"></div>
     </div>
 </div>
 
+<script type="text/ng-template" id="vcc_consult.html">
+    <div>
+        <label>类型</label>
+        <select></select>
+    </div>
+    <div>
+        <label>号码</label>
+        <input>
+    </div>
+    <div>
+        <button>咨询</button>
+        <button>取消</button>
+        <button>转移</button>
+        <button>三方</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_dial.html">
+    <div>
+        <label>类型</label>
+        <select></select>
+    </div>
+    <div>
+        <label>号码</label>
+        <input>
+    </div>
+    <div>
+        <button>外拨</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_hold.html">
+    <div>
+        <button>保持</button>
+        <button>取消</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_login.html">
+    <div>
+        <label>工号</label>
+        <input>
+    </div>
+    <div>
+        <label>绑定号码</label>
+        <input>
+    </div>
+    <div>
+        <label>密码</label>
+        <input type="password">
+    </div>
+    <div>
+        <button ng-click="login()">登录</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_logined.html">
+    <div>
+        <label>姓名</label>
+
+        <p>admin</p>
+    </div>
+    <div>
+        <label>绑定号码</label>
+        <input>
+        <button>更改</button>
+    </div>
+    <div>
+        <label>工号</label>
+        <p>101</p>
+    </div>
+    <div>
+        <label>状态</label>
+
+        <p>空闲</p>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_more.html">
+    <div>
+        <label>更多</label>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_transfer.html">
+    <div>
+        <label>类型</label>
+        <select></select>
+    </div>
+    <div>
+        <label>号码</label>
+        <input>
+    </div>
+    <div>
+        <button>转移</button>
+    </div>
+</script>
 

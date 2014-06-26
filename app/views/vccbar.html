@@ -1,5 +1,6 @@
 <div class="vccbar">
-    <a href="" ng-mouseenter="openDialog('login', $event)" ng-show="!agent.logined">{{loginTitle}}</a>
+    <a href="" disabled>{{connectedTitle}}</a>
+    <a href="" ng-mouseenter="openDialog('login', $event)" ng-show="!agent.logined">登录</a>
     <a href="" ng-mouseenter="openDialog('state', $event)" ng-show="agent.logined">空闲</a>
     <a href="" ng-mouseenter="openDialog('dial', $event)" ng-show="bar.collapse">外拨</a>
     <a href="" ng-mouseenter="openDialog('hold', $event)" ng-show="bar.collapse">保持</a>
@@ -7,6 +8,7 @@
     <a href="" ng-mouseenter="openDialog('consult', $event)" ng-show="bar.collapse">咨询</a>
     <a href="" ng-mouseenter="openDialog('more', $event)" ng-show="bar.collapse">更多</a>
     <a href="" ng-click="collapseBar()" ng-show="agent.logined">{{bar.sign}}</a>
+    <a href="" ng-show="errorTitle != ''" disabled>{{errorTitle}}</a>
 </div>
 <div ng-switch="dialog.content" ng-style="{'left': dialog.left + 'px'}" class="vccpopover" ng-show="dialog.open"
      ng-mouseleave="hideDialog()">
@@ -74,15 +76,15 @@
 <script type="text/ng-template" id="vcc_login.html">
     <div>
         <label>工号</label>
-        <input>
-    </div>
-    <div>
-        <label>绑定号码</label>
-        <input>
+        <input ng-model="agentId">
     </div>
     <div>
         <label>密码</label>
-        <input type="password">
+        <input type="password" ng-model="password">
+    </div>
+    <div>
+        <label>绑定号码</label>
+        <input ng-model="ext">
     </div>
     <div>
         <button ng-click="login()">登录</button>
@@ -102,6 +104,7 @@
     </div>
     <div>
         <label>工号</label>
+
         <p>101</p>
     </div>
     <div>

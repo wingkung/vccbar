@@ -1,10 +1,7 @@
 var app = angular.module('vccbarApp');
-app.controller('VccbarCtrl', function($scope, $log, socket, $timeout){
+app.controller('VccbarCtrl', function($scope, $log, socket, agent, $timeout){
     $scope.agent = {
-        logined: false,
-        tenantId: "",
-        agentId: "",
-        state: ""
+        logined: false
     };
 
     $scope.dialog = {
@@ -17,6 +14,12 @@ app.controller('VccbarCtrl', function($scope, $log, socket, $timeout){
         sign: '>',
         collapse: false
     };
+
+    function reset(){
+        $scope.agent.logined = false;
+        $scope.bar.sign = '>';
+        $scope.bar.collapse = false;
+    }
 
     $scope.collapseBar = function(){
         var collapse = !$scope.bar.collapse;
@@ -52,11 +55,23 @@ app.controller('VccbarCtrl', function($scope, $log, socket, $timeout){
             $scope.agent.logined = true;
             $scope.hideDialog();
         }else{
-            $scope.agent.logined = false;
+            reset();
             $scope.errorTitle = data.descr;
             $timeout(function(){
                 $scope.errorTitle = '';
             }, 5000);
         }
-    })
+    });
+
+    socket.on("logout", function(){
+        reset();
+    });
+
+    socket.on("neterror", function(data){
+        reset();
+        $scope.errorTitle = data.descr;
+        $timeout(function(){
+            $scope.errorTitle = '';
+        }, 5000);
+    });
 });

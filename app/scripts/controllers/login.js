@@ -5,7 +5,7 @@ var app = angular.module('vccbarApp');
 app.controller('LoginCtrl', function($scope, socket){
     $scope.agentId = '101';
     $scope.login = function(){
-        socket.emit('login', {tenantId: tenantId, agentId: $scope.agentId, password: $scope.password, ext: $scope.ext})
+        socket.emit('login', {tenantId: VCC_TENANTID, agentId: $scope.agentId, password: $scope.password, ext: $scope.ext})
     };
 
     socket.on('login', function(data){
@@ -14,5 +14,7 @@ app.controller('LoginCtrl', function($scope, socket){
         }else{
         }
     });
+
+
 
 });

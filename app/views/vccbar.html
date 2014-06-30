@@ -1,7 +1,7 @@
 <div class="vccbar">
     <a href="" disabled>{{connectedTitle}}</a>
     <a href="" ng-mouseenter="openDialog('login', $event)" ng-show="!agent.logined">登录</a>
-    <a href="" ng-mouseenter="openDialog('state', $event)" ng-show="agent.logined">空闲</a>
+    <a href="" ng-mouseenter="openDialog('logined', $event)" ng-show="agent.logined">状态</a>
     <a href="" ng-mouseenter="openDialog('dial', $event)" ng-show="bar.collapse">外拨</a>
     <a href="" ng-mouseenter="openDialog('hold', $event)" ng-show="bar.collapse">保持</a>
     <a href="" ng-mouseenter="openDialog('transfer', $event)" ng-show="bar.collapse">转移</a>
@@ -12,8 +12,10 @@
 </div>
 
 
-<div ng-switch="dialog.content" ng-style="{'left': dialog.left + 'px'}" class="vccpopover" ng-show="dialog.open"
-     ng-mouseleave="hideDialog()">
+<div ng-switch="dialog.content" ng-style="{'left': dialog.left + 'px'}" class="vccpopover" ng-show="dialog.open">
+    <div>
+        <a class="close" href="" ng-click="hideDialog()">X</a>
+    </div>
     <div ng-switch-when="login">
         <div ng-include="'vcc_login.html'"></div>
     </div>
@@ -40,18 +42,20 @@
 <script type="text/ng-template" id="vcc_consult.html">
     <div ng-controller="ConsultCtrl">
         <div>
-            <label>类型</label>
-            <select></select>
+            <label>类型
+                <select ng-model="type" ng-options="type.value as type.display for type in types"></select>
+            </label>
         </div>
         <div>
-            <label>号码</label>
-            <input>
+            <label>号码
+                <input ng-model="target">
+            </label>
         </div>
         <div>
-            <button>咨询</button>
-            <button>取消</button>
-            <button>转移</button>
-            <button>三方</button>
+            <button ng-click="consult()" disabled="isConsult">咨询</button>
+            <button ng-click="cancel()">取消</button>
+            <button ng-click="transfer()">转移</button>
+            <button ng-click="bridge()">三方</button>
         </div>
     </div>
 </script>
@@ -59,15 +63,18 @@
 <script type="text/ng-template" id="vcc_dial.html">
     <div ng-controller="DialCtrl">
         <div>
-            <label>类型</label>
-            <select></select>
+            <label>类型
+                <select ng-change="change()" ng-model="type"
+                        ng-options="type.value as type.display for type in types"></select>
+            </label>
         </div>
         <div>
-            <label>号码</label>
-            <input>
+            <label>号码
+                <input ng-model="target">
+            </label>
         </div>
         <div>
-            <button>外拨</button>
+            <button ng-click="dial()">外拨</button>
         </div>
     </div>
 </script>
@@ -75,8 +82,8 @@
 <script type="text/ng-template" id="vcc_hold.html">
     <div ng-controller="HoldCtrl">
         <div>
-            <button>保持</button>
-            <button>取消</button>
+            <button ng-click="hold()">保持</button>
+            <button ng-click="unHold()">取消</button>
         </div>
     </div>
 </script>
@@ -84,16 +91,19 @@
 <script type="text/ng-template" id="vcc_login.html">
     <div ng-controller="LoginCtrl">
         <div>
-            <label>工号</label>
-            <input ng-model="agentId" type="text" ng-change="valid()">
+            <label>工号
+                <input ng-model="agentId" type="text">
+            </label>
         </div>
         <div>
-            <label>密码</label>
-            <input type="password" ng-model="password">
+            <label>密码
+                <input type="password" ng-model="password">
+            </label>
         </div>
         <div>
-            <label>绑定号码</label>
-            <input ng-model="ext">
+            <label>绑定号码
+                <input ng-model="ext">
+            </label>
         </div>
         <div>
             <button ng-click="login()">登录</button>
@@ -104,24 +114,22 @@
 <script type="text/ng-template" id="vcc_logined.html">
     <div ng-controller="LoginedCtrl">
         <div>
-            <label>姓名</label>
-
-            <p>admin</p>
+            <p>姓名 {{agentName}}</p>
         </div>
         <div>
-            <label>绑定号码</label>
-            <input>
-            <button>更改</button>
+            <input ng-model="ext" placeholder="绑定号码">
+            <button ng-click="changeExt()">更改</button>
         </div>
         <div>
-            <label>工号</label>
-
-            <p>101</p>
+            <p>工号 {{agentId}}</p>
         </div>
         <div>
-            <label>状态</label>
-
-            <p>空闲</p>
+            <p>状态 {{stateDescr}}</p>
+            <button ng-click="busy()">示忙</button>
+            <button ng-click="idle()">示闲</button>
+        </div>
+        <div>
+            <button ng-click="logout()">登出</button>
         </div>
     </div>
 </script>
@@ -137,15 +145,17 @@
 <script type="text/ng-template" id="vcc_transfer.html">
     <div ng-controller="TransferCtrl">
         <div>
-            <label>类型</label>
-            <select></select>
+            <label>类型
+                <select ng-model="type" ng-options="type.value as type.display for type in types"></select>
+            </label>
         </div>
         <div>
-            <label>号码</label>
-            <input>
+            <label>号码
+                <input ng-model="target">
+            </label>
         </div>
         <div>
-            <button>转移</button>
+            <button ng-click="transfer()">转移</button>
         </div>
     </div>
 </script>

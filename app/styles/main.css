@@ -49,6 +49,13 @@ body{
     -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     bottom: 36px;
+    font-size: 13px;
+}
+
+.vccpopover .close {
+    float: right;
+    padding-right: 4px;
+    padding-top: 4px;
 }
 
 

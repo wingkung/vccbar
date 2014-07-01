@@ -52,10 +52,10 @@
             </label>
         </div>
         <div>
-            <button ng-click="consult()" disabled="isConsult">咨询</button>
-            <button ng-click="cancel()">取消</button>
-            <button ng-click="transfer()">转移</button>
-            <button ng-click="bridge()">三方</button>
+            <button ng-click="consult()" ng-disabled="disConsult">咨询</button>
+            <button ng-click="cancel()" ng-disabled="disConsultCancel">取消</button>
+            <button ng-click="transfer()" ng-disabled="disConsultTrans">转移</button>
+            <button ng-click="bridge()" ng-disabled="disConsultBridge">三方</button>
         </div>
     </div>
 </script>
@@ -74,7 +74,7 @@
             </label>
         </div>
         <div>
-            <button ng-click="dial()">外拨</button>
+            <button ng-click="dial()" ng-disabled="disDial">外拨</button>
         </div>
     </div>
 </script>
@@ -82,8 +82,8 @@
 <script type="text/ng-template" id="vcc_hold.html">
     <div ng-controller="HoldCtrl">
         <div>
-            <button ng-click="hold()">保持</button>
-            <button ng-click="unHold()">取消</button>
+            <button ng-click="hold()" ng-disabled="disHold">保持</button>
+            <button ng-click="unHold()" ng-disabled="disUnHold">取消</button>
         </div>
     </div>
 </script>
@@ -155,7 +155,7 @@
             </label>
         </div>
         <div>
-            <button ng-click="transfer()">转移</button>
+            <button ng-click="transfer()" ng-disabled="disTransfer">转移</button>
         </div>
     </div>
 </script>

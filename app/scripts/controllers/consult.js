@@ -10,14 +10,32 @@ app.controller('ConsultCtrl', function($scope, socket, agent){
 
     $scope.type = '3';
 
-    $scope.isConsult = true;
-
-    socket.on('scene', function(data){
-        if (agent.hasCtl(data.ctls, agent.ctl.A_CONSULT)){
-            $scope.isConsult = true;
+    $scope.disConsult = true;
+    $scope.disConsultCancel = true;
+    $scope.disConsultTrans = true;
+    $scope.disConsultBridge = true;
+    disableBtn(agent.ctls);
+    function disableBtn(ctls){
+        if (agent.hasCtl(ctls, agent.ctl.A_CONSULT)){
+            $scope.disConsult = false;
+            $scope.disConsultCancel = false;
         }else{
-            $scope.isConsult = false;
+            $scope.disConsult = true;
+            $scope.disConsultCancel = true;
         }
+
+        if (agent.hasCtl(ctls, agent.ctl.A_CONSULT_TRANS)){
+            $scope.disConsultTrans = false;
+            $scope.disConsultCancel = false;
+            $scope.disConsultBridge = false;
+        }else{
+            $scope.disConsultTrans = true;
+            $scope.disConsultCancel = true;
+            $scope.disConsultBridge = true;
+        }
+    }
+    socket.on('scene', function(data){
+        disableBtn(data.ctls);
     });
 
     $scope.consult = function(){

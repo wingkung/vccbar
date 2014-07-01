@@ -2,7 +2,7 @@
  * Created by wing on 2014/6/4.
  */
 var app = angular.module('vccbarApp');
-app.controller('TransferCtrl', function($scope, socket){
+app.controller('TransferCtrl', function($scope, socket, agent){
     $scope.types = [
         {value: '2', display: '号码'},
         {value: '3', display: '坐席'},
@@ -15,5 +15,18 @@ app.controller('TransferCtrl', function($scope, socket){
     $scope.transfer = function(){
         socket.emit('transfer', {type:$scope.type, target: $scope.target});
     };
+
+    $scope.disTransfer = true;
+    disableBtn(agent.ctls);
+    function disableBtn(ctls){
+        if (agent.hasCtl(ctls, agent.ctl.A_TRANS)){
+            $scope.disTransfer = false;
+        }else{
+            $scope.disTransfer = true;
+        }
+    }
+    socket.on('scene', function(data){
+        disableBtn(data.ctls);
+    });
 
 });

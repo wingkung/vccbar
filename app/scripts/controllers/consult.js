@@ -34,8 +34,8 @@ app.controller('ConsultCtrl', function($scope, socket, agent){
             $scope.disConsultBridge = true;
         }
     }
-    socket.on('scene', function(data){
-        disableBtn(data.ctls);
+    $scope.$watch(agent.ctls, function(){
+        disableBtn(agent.ctls);
     });
 
     $scope.consult = function(){

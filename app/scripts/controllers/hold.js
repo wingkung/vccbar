@@ -27,7 +27,7 @@ app.controller('HoldCtrl', function($scope, socket, agent){
             $scope.disUnHold = true;
         }
     }
-    socket.on('scene', function(data){
-        disableBtn(data.ctls);
+    $scope.$watch(agent.ctls, function(){
+        disableBtn(agent.ctls);
     });
 });

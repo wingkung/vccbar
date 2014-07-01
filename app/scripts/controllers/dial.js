@@ -23,8 +23,8 @@ app.controller('DialCtrl', function($scope, socket, agent){
             $scope.disDial = true;
         }
     }
-    socket.on('scene', function(data){
-        console.log(data);
-        disableBtn(data.ctls);
+    $scope.$watch(agent.ctls, function(){
+        console.log(agent.ctls);
+        disableBtn(agent.ctls);
     });
 });

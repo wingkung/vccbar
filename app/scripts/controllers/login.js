@@ -7,14 +7,4 @@ app.controller('LoginCtrl', function($scope, socket){
     $scope.login = function(){
         socket.emit('login', {tenantId: VCC_TENANTID, agentId: $scope.agentId, password: $scope.password, ext: $scope.ext})
     };
-
-    socket.on('login', function(data){
-        if (data.rtn){
-
-        }else{
-        }
-    });
-
-
-
 });

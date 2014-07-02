@@ -4,10 +4,12 @@
 var app = angular.module('vccbarApp');
 app.controller('HoldCtrl', function($scope, socket, agent){
     $scope.hold = function(){
+        agent.setTips("保持中");
         socket.emit('hold', {});
     };
 
     $scope.unHold = function(){
+        agent.tips = "取消中";
         socket.emit('unhold', {});
     };
 
@@ -27,7 +29,7 @@ app.controller('HoldCtrl', function($scope, socket, agent){
             $scope.disUnHold = true;
         }
     }
-    $scope.$watch(agent.ctls, function(){
+    $scope.$on("agent_change", function(){
         disableBtn(agent.ctls);
     });
 });

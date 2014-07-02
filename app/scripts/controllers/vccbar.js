@@ -42,36 +42,26 @@ app.controller('VccbarCtrl', function($scope, $log, socket, agent, $timeout){
     };
 
     $scope.connectedTitle = "未连接";
-    socket.on('connect', function(){
-        $scope.connectedTitle = "已连接";
-    });
-    socket.on('disconnect', function(){
-        $scope.connectedTitle = "断开";
-        $scope.agent.logined = false;
-    });
-
-    socket.on('login', function(data){
-        if (data.rtn){
-            $scope.agent.logined = true;
+    $scope.$on("agent_change", function(){
+        if (agent.connected){
+            $scope.connectedTitle = "连接";
+        }else{
+            $scope.connectedTitle = "断开";
+            $scope.agent.logined = false;
+        }
+        $scope.agent.logined = agent.logined;
+        if (agent.logined){
             $scope.hideDialog();
         }else{
             reset();
-            $scope.errorTitle = data.descr;
+        }
+        if (agent.tips != ""){
+            $scope.errorTitle = agent.tips;
             $timeout(function(){
                 $scope.errorTitle = '';
             }, 5000);
+        }else{
+            $scope.errorTitle = "";
         }
-    });
-
-    socket.on("logout", function(){
-        reset();
-    });
-
-    socket.on("neterror", function(data){
-        reset();
-        $scope.errorTitle = data.descr;
-        $timeout(function(){
-            $scope.errorTitle = '';
-        }, 5000);
     });
 });

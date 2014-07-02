@@ -34,23 +34,27 @@ app.controller('ConsultCtrl', function($scope, socket, agent){
             $scope.disConsultBridge = true;
         }
     }
-    $scope.$watch(agent.ctls, function(){
+    $scope.$on("agent_change", function(){
         disableBtn(agent.ctls);
     });
 
     $scope.consult = function(){
+        agent.setTips('咨询中');
         socket.emit('consult', {type: $scope.type, target: $scope.target});
     };
 
     $scope.cancel = function(){
+        agent.setTips('取消中');
         socket.emit('consult_cancel', {});
     };
 
     $scope.transfer = function(){
+        agent.setTips('转移中');
         socket.emit('consult_transfer', {});
     };
 
     $scope.bridge = function(){
+        agent.setTips('三方中');
         socket.emit('consult_bridge', {});
     };
 });

@@ -8,30 +8,29 @@ app.controller('LoginedCtrl', function($scope, socket, agent){
     $scope.ext = agent.ext;
     $scope.stateDescr = agent.stateDescr;
 
-    socket.on('info', function(data){
-        $scope.agentName = data.agentName;
-        $scope.agentId = data.agentId;
-        $scope.ext = data.ext;
+    $scope.$on("agent_change", function(){
+        $scope.agentName = agent.agentName;
+        $scope.agentId = agent.agentId;
+        $scope.ext = agent.ext;
+        $scope.stateDescr = agent.stateDescr;
     });
-
-    socket.on('state', function(data){
-        $scope.stateDescr = data.stateDescr;
-    });
-
 
     $scope.changeExt = function(){
 
     };
 
     $scope.logout = function(){
+        agent.setTips("登出中");
         socket.emit('logout', {});
     };
 
     $scope.busy = function(){
+        agent.setTips("示忙中");
         socket.emit('change_state', {state: 1});
     };
 
     $scope.idle = function(){
+        agent.setTips("示闲中");
         socket.emit('change_state', {state: 0});
     };
 });

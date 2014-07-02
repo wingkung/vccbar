@@ -11,6 +11,7 @@ app.controller('DialCtrl', function($scope, socket, agent){
     $scope.type = '2';
 
     $scope.dial = function(){
+        agent.setTips("呼叫中");
         socket.emit('dial', {type: $scope.type, target: $scope.target, code400: VCC_CODE400, code: VCC_CODE});
     };
 
@@ -23,8 +24,8 @@ app.controller('DialCtrl', function($scope, socket, agent){
             $scope.disDial = true;
         }
     }
-    $scope.$watch(agent.ctls, function(){
-        console.log(agent.ctls);
+    $scope.$on("agent_change", function(){
+        console.log("dial agent change", agent.ctls);
         disableBtn(agent.ctls);
     });
 });

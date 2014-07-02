@@ -13,6 +13,7 @@ app.controller('TransferCtrl', function($scope, socket, agent){
     $scope.type = '3';
 
     $scope.transfer = function(){
+        agent.setTips("转移中");
         socket.emit('transfer', {type:$scope.type, target: $scope.target});
     };
 
@@ -25,7 +26,7 @@ app.controller('TransferCtrl', function($scope, socket, agent){
             $scope.disTransfer = true;
         }
     }
-    $scope.$watch(agent.ctls, function(){
+    $scope.$on("agent_change", function(){
         disableBtn(agent.ctls);
     });
 

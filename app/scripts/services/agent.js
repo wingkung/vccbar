@@ -49,6 +49,7 @@ app.factory('agent', function($rootScope, socket){
     socket.on('disconnect', function(){
         console.log('ws断开');
         agent.connected = false;
+        agent.logined = false;
         $rootScope.$broadcast('agent_change');
     });
 
@@ -102,6 +103,67 @@ app.factory('agent', function($rootScope, socket){
     socket.on('scene', function(data){
         agent.ctls = data.ctls;
         agent.scene = data.scene;
+        $rootScope.$broadcast('agent_change');
+    });
+
+    socket.on('agents_info', function(data){
+        $rootScope.$broadcast('agents_info', data);
+    });
+
+    socket.on('ivrs_info', function(data){
+        $rootScope.$broadcast('ivrs_info', data);
+    });
+
+    socket.on('queues_info', function(data){
+        $rootScope.$broadcast('queues_info', data);
+    });
+
+    socket.on('dial', function(data){
+        agent.tips = data.descr;
+        $rootScope.$broadcast('agent_change');
+    });
+
+    socket.on('hold', function(data){
+        agent.tips = data.descr;
+        $rootScope.$broadcast('agent_change');
+    });
+    socket.on('unhold', function(data){
+        agent.tips = data.descr;
+        $rootScope.$broadcast('agent_change');
+    });
+
+    socket.on('transfer', function(data){
+        agent.tips = data.descr;
+        $rootScope.$broadcast('agent_change');
+    });
+
+    socket.on('consult', function(data){
+        agent.tips = data.descr;
+        $rootScope.$broadcast('agent_change');
+    });
+
+    socket.on('consult_cancel', function(data){
+        agent.tips = data.descr;
+        $rootScope.$broadcast('agent_change');
+    });
+
+    socket.on('consult_transfer', function(data){
+        agent.tips = data.descr;
+        $rootScope.$broadcast('agent_change');
+    });
+
+    socket.on('consult_bridge', function(data){
+        agent.tips = data.descr;
+        $rootScope.$broadcast('agent_change');
+    });
+
+    socket.on('userin', function(data){
+        if (data.sessionType == '1'){
+            vccIncoming(data);
+        }else if (data.sessionType == '2'){
+            vccOutgoing(data);
+        }
+
     });
     return agent;
 });

@@ -8,7 +8,9 @@ app.controller('ConsultCtrl', function($scope, socket, agent){
         {value: '3', display: '坐席'}
     ];
 
-    $scope.type = '3';
+    $scope.type = '2';
+    $scope.targetAgentId = '';
+    $scope.agents = [];
 
     $scope.disConsult = true;
     $scope.disConsultCancel = true;
@@ -34,13 +36,32 @@ app.controller('ConsultCtrl', function($scope, socket, agent){
             $scope.disConsultBridge = true;
         }
     }
+
+
+    $scope.typeChange = function(){
+        if ($scope.type == 3){
+            socket.emit('agents_info', {});
+        }
+    };
+
+    $scope.$on('agents_info', function(event, data){
+        $scope.agents = [];
+        angular.forEach(data, function(item){
+            $scope.agents.push({value: item.agentId, display: item.name + '(' + item.agentId + ')' + item.stateDescr});
+        });
+    });
+
     $scope.$on("agent_change", function(){
         disableBtn(agent.ctls);
     });
 
     $scope.consult = function(){
         agent.setTips('咨询中');
-        socket.emit('consult', {type: $scope.type, target: $scope.target});
+        var target = $scope.target;
+        if ($scope.type == 3){
+            target = $scope.targetAgentId;
+        }
+        socket.emit('consult', {type: $scope.type, target: target});
     };
 
     $scope.cancel = function(){

@@ -8,12 +8,27 @@ app.controller('DialCtrl', function($scope, socket, agent){
         {value: '3', display: '坐席'}
     ];
 
+    $scope.agents = [];
+
     $scope.type = '2';
 
     $scope.dial = function(){
         agent.setTips("呼叫中");
         socket.emit('dial', {type: $scope.type, target: $scope.target, code400: VCC_CODE400, code: VCC_CODE});
     };
+
+    $scope.typeChange = function(){
+        if ($scope.type == 3){
+            socket.emit('agents_info', {});
+        }
+    };
+
+    $scope.$on('agents_info', function(event, data){
+        $scope.agents = [];
+        angular.forEach(data, function(item){
+            $scope.agents.push({value: item.agentId, display: item.name + '(' + item.agentId + ')' + item.stateDescr});
+        });
+    });
 
     $scope.disDial = true;
     disableBtn(agent.ctls);
@@ -25,7 +40,6 @@ app.controller('DialCtrl', function($scope, socket, agent){
         }
     }
     $scope.$on("agent_change", function(){
-        console.log("dial agent change", agent.ctls);
         disableBtn(agent.ctls);
     });
 });

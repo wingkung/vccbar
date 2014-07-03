@@ -25,12 +25,10 @@ app.controller('LoginedCtrl', function($scope, socket, agent){
     };
 
     $scope.busy = function(){
-        agent.setTips("示忙中");
         socket.emit('change_state', {state: 1});
     };
 
     $scope.idle = function(){
-        agent.setTips("示闲中");
         socket.emit('change_state', {state: 0});
     };
 });

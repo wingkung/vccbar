@@ -7,8 +7,8 @@
     <a href="" ng-mouseenter="openDialog('transfer', $event)" ng-show="bar.collapse">转移</a>
     <a href="" ng-mouseenter="openDialog('consult', $event)" ng-show="bar.collapse">咨询</a>
     <a href="" ng-mouseenter="openDialog('more', $event)" ng-show="bar.collapse">更多</a>
-    <a href="" ng-click="collapseBar()" ng-show="agent.logined">{{bar.sign}}</a>
     <a href="" ng-show="errorTitle != ''" disabled>{{errorTitle}}</a>
+    <a href="" ng-click="collapseBar()" ng-show="agent.logined">{{bar.sign}}</a>
 </div>
 
 
@@ -39,54 +39,6 @@
     </div>
 </div>
 
-<script type="text/ng-template" id="vcc_consult.html">
-    <div ng-controller="ConsultCtrl">
-        <div>
-            <label>类型
-                <select ng-model="type" ng-options="type.value as type.display for type in types"></select>
-            </label>
-        </div>
-        <div>
-            <label>号码
-                <input ng-model="target">
-            </label>
-        </div>
-        <div>
-            <button ng-click="consult()" ng-disabled="disConsult">咨询</button>
-            <button ng-click="cancel()" ng-disabled="disConsultCancel">取消</button>
-            <button ng-click="transfer()" ng-disabled="disConsultTrans">转移</button>
-            <button ng-click="bridge()" ng-disabled="disConsultBridge">三方</button>
-        </div>
-    </div>
-</script>
-
-<script type="text/ng-template" id="vcc_dial.html">
-    <div ng-controller="DialCtrl">
-        <div>
-            <label>类型
-                <select ng-change="change()" ng-model="type"
-                        ng-options="type.value as type.display for type in types"></select>
-            </label>
-        </div>
-        <div>
-            <label>号码
-                <input ng-model="target">
-            </label>
-        </div>
-        <div>
-            <button ng-click="dial()" ng-disabled="disDial">外拨</button>
-        </div>
-    </div>
-</script>
-
-<script type="text/ng-template" id="vcc_hold.html">
-    <div ng-controller="HoldCtrl">
-        <div>
-            <button ng-click="hold()" ng-disabled="disHold">保持</button>
-            <button ng-click="unHold()" ng-disabled="disUnHold">取消</button>
-        </div>
-    </div>
-</script>
 
 <script type="text/ng-template" id="vcc_login.html">
     <div ng-controller="LoginCtrl">
@@ -134,10 +86,60 @@
     </div>
 </script>
 
-<script type="text/ng-template" id="vcc_more.html">
-    <div ng-controller="MoreCtrl">
+<script type="text/ng-template" id="vcc_hold.html">
+    <div ng-controller="HoldCtrl">
         <div>
-            <label>更多</label>
+            <button ng-click="hold()" ng-disabled="disHold">保持</button>
+            <button ng-click="unHold()" ng-disabled="disUnHold">取消</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_dial.html">
+    <div ng-controller="DialCtrl">
+        <div>
+            <label>类型
+                <select ng-change="typeChange()" ng-model="type"
+                        ng-options="type.value as type.display for type in types"></select>
+            </label>
+        </div>
+
+        <div ng-switch="type">
+            <label ng-switch-when="2">号码
+                <input ng-model="$parent.target">
+            </label>
+            <label ng-switch-when="3">坐席
+                <select ng-model="$parent.target" ng-options="agent.value as agent.display for agent in agents"></select>
+            </label>
+        </div>
+        <div>
+            <button ng-click="dial()" ng-disabled="disDial">外拨</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_consult.html">
+    <div ng-controller="ConsultCtrl">
+        <div>
+            <label>类型
+                <select ng-model="type" ng-change="typeChange()" ng-options="type.value as type.display for type in types"></select>
+            </label>
+        </div>
+        <div>
+            <div ng-switch="type">
+                <label ng-switch-when="2">号码
+                    <input ng-model="$parent.target">
+                </label>
+                <label ng-switch-when="3">坐席
+                    <select ng-model="$parent.target" ng-options="agent.value as agent.display for agent in agents"></select>
+                </label>
+            </div>
+        </div>
+        <div>
+            <button ng-click="consult()" ng-disabled="disConsult">咨询</button>
+            <button ng-click="cancel()" ng-disabled="disConsultCancel">取消</button>
+            <button ng-click="transfer()" ng-disabled="disConsultTrans">转移</button>
+            <button ng-click="bridge()" ng-disabled="disConsultBridge">三方</button>
         </div>
     </div>
 </script>
@@ -146,17 +148,40 @@
     <div ng-controller="TransferCtrl">
         <div>
             <label>类型
-                <select ng-model="type" ng-options="type.value as type.display for type in types"></select>
+                <select ng-model="type" ng-change="typeChange()" ng-options="type.value as type.display for type in types"></select>
             </label>
         </div>
-        <div>
-            <label>号码
-                <input ng-model="target">
+        <div ng-switch="type">
+            <label ng-switch-when="2">号码
+                <input ng-model="$parent.target">
+            </label>
+            <label ng-switch-when="3">坐席
+                <select ng-model="$parent.target" ng-options="agent.value as agent.display for agent in agents"></select>
+            </label>
+            <label ng-switch-when="1">IVR
+                <select ng-model="$parent.target" ng-options="ivr.value as ivr.display for ivr in ivrs"></select>
+            </label>
+            <label ng-switch-when="4">队列
+                <select ng-model="$parent.target" ng-options="queue.value as queue.display for queue in queues"></select>
             </label>
         </div>
         <div>
             <button ng-click="transfer()" ng-disabled="disTransfer">转移</button>
         </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_more.html">
+    <div ng-controller="MoreCtrl">
+        <div>
+            <button ng-click="refresh()">刷新</button>
+        </div>
+
+        <ul>
+            <li ng-repeat="agent in agents">
+                <p>{{agent.name}} {{agent.stateDescr}}</p>
+            </li>
+        </ul>
     </div>
 </script>
 

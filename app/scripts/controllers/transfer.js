@@ -14,21 +14,10 @@ app.controller('TransferCtrl', function($scope, socket, agent){
     $scope.ivrs = [];
     $scope.queues = [];
     $scope.type = '2';
-    $scope.targetAgentId = '';
-    $scope.targetIvrId = '';
-    $scope.targetQueueId = '';
 
     $scope.transfer = function(){
         agent.setTips("转移中");
-        var target = $scope.target;
-        if ($scope.type == 3){
-            target = $scope.targetAgentId;
-        }else if ($scope.type == 4){
-            target = $scope.targetQueueId;
-        }else if ($scope.type = 1){
-            target = $scope.targetIvrId;
-        }
-        socket.emit('transfer', {type:$scope.type, target: target});
+        socket.emit('transfer', {type:$scope.type, target: $scope.target});
     };
 
     $scope.disTransfer = true;

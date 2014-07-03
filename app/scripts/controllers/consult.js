@@ -9,7 +9,6 @@ app.controller('ConsultCtrl', function($scope, socket, agent){
     ];
 
     $scope.type = '2';
-    $scope.targetAgentId = '';
     $scope.agents = [];
 
     $scope.disConsult = true;
@@ -57,11 +56,7 @@ app.controller('ConsultCtrl', function($scope, socket, agent){
 
     $scope.consult = function(){
         agent.setTips('咨询中');
-        var target = $scope.target;
-        if ($scope.type == 3){
-            target = $scope.targetAgentId;
-        }
-        socket.emit('consult', {type: $scope.type, target: target});
+        socket.emit('consult', {type: $scope.type, target: $scope.target});
     };
 
     $scope.cancel = function(){

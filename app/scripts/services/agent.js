@@ -24,8 +24,6 @@ app.factory('agent', function($rootScope, socket){
             return (ctls & ctl) != 0;
         },
 
-
-
         ctl: {
             A_TRANS: 1<< 1,
             A_HOLD: 1<<2,

@@ -38,6 +38,7 @@ app.controller('ConsultCtrl', function($scope, socket, agent){
 
 
     $scope.typeChange = function(){
+        $scope.target = '';
         if ($scope.type == 3){
             socket.emit('agents_info', {});
         }

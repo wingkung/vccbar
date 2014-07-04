@@ -1,44 +1,43 @@
-<div class="vccbar">
-    <a href="" disabled>{{connectedTitle}}</a>
-    <a href="" ng-mouseenter="openDialog('login', $event)" ng-show="!agent.logined">登录</a>
-    <a href="" ng-mouseenter="openDialog('logined', $event)" ng-show="agent.logined">状态</a>
-    <a href="" ng-mouseenter="openDialog('dial', $event)" ng-show="bar.collapse">外拨</a>
-    <a href="" ng-mouseenter="openDialog('hold', $event)" ng-show="bar.collapse">保持</a>
-    <a href="" ng-mouseenter="openDialog('transfer', $event)" ng-show="bar.collapse">转移</a>
-    <a href="" ng-mouseenter="openDialog('consult', $event)" ng-show="bar.collapse">咨询</a>
-    <a href="" ng-mouseenter="openDialog('more', $event)" ng-show="bar.collapse">更多</a>
-    <a href="" ng-show="errorTitle != ''" disabled>{{errorTitle}}</a>
-    <a href="" ng-click="collapseBar()" ng-show="agent.logined">{{bar.sign}}</a>
-</div>
+<div class="vccgbtn">
+    <div class="btn" title="登录" ng-show="!agent.logined">
+        <span class="left">{{connectedTitle}}</span>
+        <div class="right" ng-include="'vcc_login.html'"></div>
+    </div>
 
+    <div class="btn" title="状态" ng-show="agent.logined">
+        <span class="left">状态</span>
+        <div class="right" ng-include="'vcc_logined.html'"></div>
+    </div>
 
-<div ng-switch="dialog.content" ng-style="{'left': dialog.left + 'px'}" class="vccpopover" ng-show="dialog.open">
-    <div>
-        <a class="close" href="" ng-click="hideDialog()">X</a>
+    <div class="btn" title="通话" ng-show="agent.logined">
+        <span class="left">通话</span>
+        <div class="right" ng-include="'vcc_talk.html'"></div>
     </div>
-    <div ng-switch-when="login">
-        <div ng-include="'vcc_login.html'"></div>
+
+    <div class="btn" title="外拨" ng-show="agent.logined">
+        <span class="left">外拨</span>
+        <div class="right" ng-include="'vcc_dial.html'"></div>
     </div>
-    <div ng-switch-when="dial">
-        <div ng-include="'vcc_dial.html'"></div>
+
+    <div class="btn" title="转移" ng-show="agent.logined">
+        <span class="left">转移</span>
+        <div class="right" ng-include="'vcc_transfer.html'"></div>
     </div>
-    <div ng-switch-when="hold">
-        <div ng-include="'vcc_hold.html'"></div>
+
+    <div class="btn" title="咨询" ng-show="agent.logined">
+        <span class="left">咨询</span>
+        <div class="right" ng-include="'vcc_consult.html'"></div>
     </div>
-    <div ng-switch-when="consult">
-        <div ng-include="'vcc_consult.html'"></div>
-    </div>
-    <div ng-switch-when="logined">
-        <div ng-include="'vcc_logined.html'"></div>
-    </div>
-    <div ng-switch-when="more">
-        <div ng-include="'vcc_more.html'"></div>
-    </div>
-    <div ng-switch-when="transfer">
-        <div ng-include="'vcc_transfer.html'"></div>
+
+    <div class="btn" title="更多" ng-show="agent.logined">
+        <span class="left">更多</span>
+        <div class="right" ng-include="'vcc_more.html'"></div>
     </div>
 </div>
 
+<div class="vcctips" ng-show="errorTitle != ''">
+    <span>{{errorTitle}}</span>
+</div>
 
 <script type="text/ng-template" id="vcc_login.html">
     <div ng-controller="LoginCtrl">
@@ -89,6 +88,16 @@
 <script type="text/ng-template" id="vcc_hold.html">
     <div ng-controller="HoldCtrl">
         <div>
+            <button ng-click="hold()" ng-disabled="disHold">保持</button>
+            <button ng-click="unHold()" ng-disabled="disUnHold">取消</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="vcc_talk.html">
+    <div ng-controller="TalkCtrl">
+        <div>
+            <button ng-click="hangup()" ng-disabled="disHangup">挂机</button>
             <button ng-click="hold()" ng-disabled="disHold">保持</button>
             <button ng-click="unHold()" ng-disabled="disUnHold">取消</button>
         </div>

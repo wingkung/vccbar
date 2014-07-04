@@ -13,11 +13,13 @@ app.controller('DialCtrl', function($scope, socket, agent){
     $scope.type = '2';
 
     $scope.dial = function(){
+        $scope.disDial = true;
         agent.setTips("呼叫中");
         socket.emit('dial', {type: $scope.type, target: $scope.target, code400: VCC_CODE400, code: VCC_CODE});
     };
 
     $scope.typeChange = function(){
+        $scope.target = '';
         if ($scope.type == 3){
             socket.emit('agents_info', {});
         }

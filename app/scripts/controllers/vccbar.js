@@ -59,6 +59,7 @@ app.controller('VccbarCtrl', function($scope, $log, socket, agent, $timeout){
             $scope.errorTitle = agent.tips;
             $timeout(function(){
                 $scope.errorTitle = '';
+                agent.tips = '';
             }, 5000);
         }else{
             $scope.errorTitle = "";

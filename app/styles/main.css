@@ -1,5 +1,5 @@
 .vccgbtn {
-    font-size: 10px;
+    font-size: 12px;
     position: fixed;
     right: 0;
     bottom: 100px;
@@ -23,7 +23,7 @@
     background: #FFF;
     color: gray;
     left: 0;
-    width: 290px;
+    width: 260px;
     white-space: nowrap;
     -webkit-transition: left .3s ease-in-out;
     -moz-transition: left .3s ease-in-out;
@@ -32,7 +32,7 @@
 }
 
 .vccgbtn .extend{
-    left: -260px;
+    left: -240px;
     height: 150px;
 }
 
@@ -43,11 +43,16 @@
 }
 
 .vccgbtn .right{
-    padding-left: 40px;
-    padding-right: 10px;
+    padding-left: 10px;
     overflow: auto;
     height: 150px;
+    display: none;
 }
+
+.vccgbtn .extend .right{
+    display: block;
+}
+
 
 .vcctips {
     width: 100%;
@@ -62,4 +67,72 @@
     text-align: center;
     padding-top: 200px;
     font-size: 20px;
+}
+
+.vccframe {
+    color: #252525;
+    line-height: 15px;
+    text-align: left;
+}
+
+.vccframe-tips {
+    color: #888;
+    line-height: 15px;
+}
+
+.vccframe-label {
+    margin-bottom: 5px;
+    float: left;
+    display: inline;
+    width: 190px;
+    margin-right: 10px;
+}
+
+.vccframe-ipt {
+     float: right;
+     width: 130px;
+     height: 15px;
+     line-height: 15px;
+     text-indent: 6px;
+     border: 1px solid #ddd;
+ }
+
+.vccframe-slt {
+    float: right;
+    width: 130px;
+    height: 15px;
+    line-height: 15px;
+    text-indent: 6px;
+    border: 1px solid #ddd;
+}
+
+.vccframe-span {
+    float: right;
+    width: 130px;
+    height: 15px;
+    line-height: 15px;
+    text-indent: 6px;
+}
+
+.vccframe-btn {
+    margin-bottom: 5px;
+    float: left;
+    width: 190px;
+    height: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #239438;
+    color: #fff;
+    background-color: #5eba6d;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgb(94, 186, 109)), to(rgb(60, 160, 81)));
+    background-image: -webkit-linear-gradient(top, rgb(94, 186, 109), rgb(60, 160, 81));
+    background-image: -moz-linear-gradient(top, rgb(94, 186, 109), rgb(60, 160, 81));
+    background-image: -o-linear-gradient(top, rgb(94, 186, 109), rgb(60, 160, 81));
+    background-image: -ms-linear-gradient(top, rgb(94, 186, 109), rgb(60, 160, 81));
+    background-image: linear-gradient(top, rgb(94, 186, 109), rgb(60, 160, 81));
+}
+
+.vccframe-btn:disabled{
+    opacity: 0.7;
+    cursor: default;
 }

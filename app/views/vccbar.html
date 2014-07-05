@@ -1,36 +1,43 @@
 <div class="vccgbtn">
     <div class="btn" title="登录" ng-show="!agent.logined">
         <span class="left">{{connectedTitle}}</span>
+
         <div class="right" ng-include="'vcc_login.html'"></div>
     </div>
 
     <div class="btn" title="状态" ng-show="agent.logined">
         <span class="left">状态</span>
+
         <div class="right" ng-include="'vcc_logined.html'"></div>
     </div>
 
     <div class="btn" title="通话" ng-show="agent.logined">
         <span class="left">通话</span>
+
         <div class="right" ng-include="'vcc_talk.html'"></div>
     </div>
 
     <div class="btn" title="外拨" ng-show="agent.logined">
         <span class="left">外拨</span>
+
         <div class="right" ng-include="'vcc_dial.html'"></div>
     </div>
 
     <div class="btn" title="转移" ng-show="agent.logined">
         <span class="left">转移</span>
+
         <div class="right" ng-include="'vcc_transfer.html'"></div>
     </div>
 
     <div class="btn" title="咨询" ng-show="agent.logined">
         <span class="left">咨询</span>
+
         <div class="right" ng-include="'vcc_consult.html'"></div>
     </div>
 
     <div class="btn" title="更多" ng-show="agent.logined">
         <span class="left">更多</span>
+
         <div class="right" ng-include="'vcc_more.html'"></div>
     </div>
 </div>
@@ -40,157 +47,146 @@
 </div>
 
 <script type="text/ng-template" id="vcc_login.html">
-    <div ng-controller="LoginCtrl">
-        <div>
-            <label>工号
-                <input ng-model="agentId" type="text">
-            </label>
-        </div>
-        <div>
-            <label>密码
-                <input type="password" ng-model="password">
-            </label>
-        </div>
-        <div>
-            <label>绑定号码
-                <input ng-model="ext">
-            </label>
-        </div>
-        <div>
-            <button ng-click="login()">登录</button>
-        </div>
+    <div class="vccframe" ng-controller="LoginCtrl">
+        <label class="vccframe-label">工号
+            <input class="vccframe-ipt" ng-model="agentId" type="text">
+        </label>
+
+        <label class="vccframe-label">密码
+            <input class="vccframe-ipt" type="password" ng-model="password">
+        </label>
+
+        <label class="vccframe-label">绑定号码
+            <input class="vccframe-ipt" ng-model="ext">
+        </label>
+
+        <button class="vccframe-btn" ng-click="login()">登录</button>
     </div>
 </script>
 
 <script type="text/ng-template" id="vcc_logined.html">
-    <div ng-controller="LoginedCtrl">
-        <div>
-            <p>姓名 {{agentName}}</p>
-        </div>
-        <div>
-            <input ng-model="ext" placeholder="绑定号码">
-            <button ng-click="changeExt()">更改</button>
-        </div>
-        <div>
-            <p>工号 {{agentId}}</p>
-        </div>
-        <div>
-            <p>状态 {{stateDescr}}</p>
-            <button ng-click="busy()">示忙</button>
-            <button ng-click="idle()">示闲</button>
-        </div>
-        <div>
-            <button ng-click="logout()">登出</button>
-        </div>
+    <div class="vccframe" ng-controller="LoginedCtrl">
+        <label class="vccframe-label">姓名
+            <span class="vccframe-span">{{agentName}}</span>
+        </label>
+
+        <label class="vccframe-label">绑定号码
+            <input class="vccframe-ipt" ng-model="ext" placeholder="绑定号码">
+        </label>
+        <button class="vccframe-btn" ng-click="changeExt()">更改</button>
+
+        <label class="vccframe-label">工号
+            <span class="vccframe-span">{{agentId}}</span>
+        </label>
+
+        <label class="vccframe-label">状态 <span class="vccframe-span">{{stateDescr}}</span></label>
+        <button class="vccframe-btn" ng-click="busy()">示忙</button>
+        <button class="vccframe-btn" ng-click="idle()">示闲</button>
+
+        <button class="vccframe-btn" ng-click="logout()">登出</button>
+
     </div>
 </script>
 
 <script type="text/ng-template" id="vcc_hold.html">
-    <div ng-controller="HoldCtrl">
-        <div>
-            <button ng-click="hold()" ng-disabled="disHold">保持</button>
-            <button ng-click="unHold()" ng-disabled="disUnHold">取消</button>
-        </div>
+    <div class="vccframe" ng-controller="HoldCtrl">
+        <button class="vccframe-btn" ng-click="hold()" ng-disabled="disHold">保持</button>
+        <button class="vccframe-btn" ng-click="unHold()" ng-disabled="disUnHold">取消</button>
     </div>
 </script>
 
 <script type="text/ng-template" id="vcc_talk.html">
-    <div ng-controller="TalkCtrl">
-        <div>
-            <button ng-click="hangup()" ng-disabled="disHangup">挂机</button>
-            <button ng-click="hold()" ng-disabled="disHold">保持</button>
-            <button ng-click="unHold()" ng-disabled="disUnHold">取消</button>
-        </div>
+    <div class="vccframe" ng-controller="TalkCtrl">
+        <button class="vccframe-btn" ng-click="hangup()" ng-disabled="disHangup">挂机</button>
+        <button class="vccframe-btn" ng-click="hold()" ng-disabled="disHold">保持</button>
+        <button class="vccframe-btn" ng-click="unHold()" ng-disabled="disUnHold">取消</button>
     </div>
 </script>
 
 <script type="text/ng-template" id="vcc_dial.html">
-    <div ng-controller="DialCtrl">
-        <div>
-            <label>类型
-                <select ng-change="typeChange()" ng-model="type"
-                        ng-options="type.value as type.display for type in types"></select>
-            </label>
-        </div>
+    <div class="vccframe" ng-controller="DialCtrl">
+        <label class="vccframe-label">类型
+            <select class="vccframe-slt" ng-change="typeChange()" ng-model="type"
+                    ng-options="type.value as type.display for type in types"></select>
+        </label>
 
         <div ng-switch="type">
-            <label ng-switch-when="2">号码
-                <input ng-model="$parent.target">
+            <label class="vccframe-label" ng-switch-when="2">号码
+                <input class="vccframe-ipt" ng-model="$parent.target">
             </label>
-            <label ng-switch-when="3">坐席
-                <select ng-model="$parent.target" ng-options="agent.value as agent.display for agent in agents"></select>
+            <label class="vccframe-label" ng-switch-when="3">坐席
+                <select class="vccframe-slt" ng-model="$parent.target"
+                        ng-options="agent.value as agent.display for agent in agents"></select>
             </label>
         </div>
-        <div>
-            <button ng-click="dial()" ng-disabled="disDial">外拨</button>
-        </div>
+        <button class="vccframe-btn" ng-click="dial()" ng-disabled="disDial">外拨</button>
     </div>
 </script>
 
 <script type="text/ng-template" id="vcc_consult.html">
-    <div ng-controller="ConsultCtrl">
-        <div>
-            <label>类型
-                <select ng-model="type" ng-change="typeChange()" ng-options="type.value as type.display for type in types"></select>
+    <div class="vccframe" ng-controller="ConsultCtrl">
+        <label class="vccframe-label">类型
+            <select class="vccframe-slt" ng-model="type" ng-change="typeChange()"
+                    ng-options="type.value as type.display for type in types"></select>
+        </label>
+
+        <div ng-switch="type">
+            <label class="vccframe-label" ng-switch-when="2">号码
+                <input class="vccframe-ipt" ng-model="$parent.target">
+            </label>
+            <label class="vccframe-label" ng-switch-when="3">坐席
+                <select class="vccframe-slt" ng-model="$parent.target"
+                        ng-options="agent.value as agent.display for agent in agents"></select>
             </label>
         </div>
-        <div>
-            <div ng-switch="type">
-                <label ng-switch-when="2">号码
-                    <input ng-model="$parent.target">
-                </label>
-                <label ng-switch-when="3">坐席
-                    <select ng-model="$parent.target" ng-options="agent.value as agent.display for agent in agents"></select>
-                </label>
-            </div>
-        </div>
-        <div>
-            <button ng-click="consult()" ng-disabled="disConsult">咨询</button>
-            <button ng-click="cancel()" ng-disabled="disConsultCancel">取消</button>
-            <button ng-click="transfer()" ng-disabled="disConsultTrans">转移</button>
-            <button ng-click="bridge()" ng-disabled="disConsultBridge">三方</button>
-        </div>
+
+        <button class="vccframe-btn" ng-click="consult()" ng-disabled="disConsult">咨询</button>
+        <button class="vccframe-btn ng-click=" cancel
+        ()" ng-disabled="disConsultCancel">取消</button>
+        <button class="vccframe-btn ng-click=" transfer
+        ()" ng-disabled="disConsultTrans">转移</button>
+        <button class="vccframe-btn ng-click=" bridge
+        ()" ng-disabled="disConsultBridge">三方</button>
+
     </div>
 </script>
 
 <script type="text/ng-template" id="vcc_transfer.html">
-    <div ng-controller="TransferCtrl">
-        <div>
-            <label>类型
-                <select ng-model="type" ng-change="typeChange()" ng-options="type.value as type.display for type in types"></select>
-            </label>
-        </div>
+    <div class="vccframe" ng-controller="TransferCtrl">
+
+        <label class="vccframe-label">类型
+            <select class="vccframe-slt" ng-model="type" ng-change="typeChange()"
+                    ng-options="type.value as type.display for type in types"></select>
+        </label>
+
         <div ng-switch="type">
-            <label ng-switch-when="2">号码
-                <input ng-model="$parent.target">
+            <label class="vccframe-label" ng-switch-when="2">号码
+                <input class="vccframe-ipt" ng-model="$parent.target">
             </label>
-            <label ng-switch-when="3">坐席
-                <select ng-model="$parent.target" ng-options="agent.value as agent.display for agent in agents"></select>
+            <label class="vccframe-label" ng-switch-when="3">坐席
+                <select class="vccframe-slt" ng-model="$parent.target"
+                        ng-options="agent.value as agent.display for agent in agents"></select>
             </label>
-            <label ng-switch-when="1">IVR
-                <select ng-model="$parent.target" ng-options="ivr.value as ivr.display for ivr in ivrs"></select>
+            <label class="vccframe-label" ng-switch-when="1">IVR
+                <select class="vccframe-slt" ng-model="$parent.target"
+                        ng-options="ivr.value as ivr.display for ivr in ivrs"></select>
             </label>
-            <label ng-switch-when="4">队列
-                <select ng-model="$parent.target" ng-options="queue.value as queue.display for queue in queues"></select>
+            <label class="vccframe-label" ng-switch-when="4">队列
+                <select class="vccframe-slt" ng-model="$parent.target"
+                        ng-options="queue.value as queue.display for queue in queues"></select>
             </label>
         </div>
-        <div>
-            <button ng-click="transfer()" ng-disabled="disTransfer">转移</button>
-        </div>
+        <button class="vccframe-btn" ng-click="transfer()" ng-disabled="disTransfer">转移</button>
+
     </div>
 </script>
 
 <script type="text/ng-template" id="vcc_more.html">
-    <div ng-controller="MoreCtrl">
-        <div>
-            <button ng-click="refresh()">刷新</button>
-        </div>
-
-        <ul>
-            <li ng-repeat="agent in agents">
-                <p>{{agent.name}} {{agent.stateDescr}}</p>
-            </li>
-        </ul>
+    <div class="vccframe" ng-controller="MoreCtrl">
+        <button class="vccframe-btn" ng-click="refresh()">刷新</button>
+        <label class="vccframe-label" ng-repeat="agent in agents">{{agent.name}}
+            <span class="vccframe-span">{{agent.stateDescr}}</span>
+        </label>
     </div>
 </script>
 
